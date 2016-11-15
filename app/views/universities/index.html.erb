@@ -1,0 +1,41 @@
+<h1> University details </h1>
+<div id="main-container" class="container">
+    <%= form_tag(universities_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search,  params[:search], placeholder: "Search Universities" %>
+    <%= submit_tag "Search" %>
+    <% end %>
+</div>
+
+
+<% if @universities.present? %>
+    <div id="main-container" class="container">
+    <table id="data" class="tabular">
+      <tr>
+        <th class="col-xs-3">Univ_ID</th>
+        <th class="col-xs-3">Name</th>
+        <th class="col-xs-3">Rank</th>
+        <th class="col-xs-3">City</th>
+        <th class="col-xs-3">State</th>
+        <th class="col-xs-3">Acceptance Rate</th>
+        <th class="col-xs-3">College Type</th>
+        <th class="col-xs-3">Tution Fee</th>
+        <th class="col-xs-3">Enrollment</th>
+      </tr>
+      <% @universities.each do |university| %>
+      <tr>
+        <td class="col-xs-2"><%= university.id %></td>
+        <td class="col-xs-2"><%= university.name %></td>
+        <td class="col-xs-2"><%= university.rank %></td>
+        <td class="col-xs-2"><%= university.city %></td>
+        <td class="col-xs-2"><%= university.state %></td>
+        <td class="col-xs-2"><%= university.acceptanceRate %></td>
+        <td class="col-xs-2"><%= university.collegeType %></td>
+        <td class="col-xs-2"><%= university.arrTuition %></td>
+        <td class="col-xs-2"><%= university.enrollment %></td>
+      </tr>
+    <% end %>
+    </table>
+    </div>
+<% else %>
+  <p>There are no universities containing the term(s) <%= params[:search] %>.</p>
+<% end %>    
